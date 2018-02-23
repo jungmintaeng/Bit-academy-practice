@@ -1,23 +1,27 @@
 package prob05;
 
-public class MyStack {
+public class MyStack <T> {
 	private static final int INIT_SIZE = 3;
-	private String[] buffer;
+	private T[] buffer;
 	private int capacity;
 	private int top = -1;
 	
+	@SuppressWarnings("unchecked")
 	public MyStack() {
-		buffer = new String[INIT_SIZE];
+		buffer = ( T[] )new Object[INIT_SIZE];
+		capacity = INIT_SIZE;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public MyStack(int bufSize) {
-		buffer = new String[bufSize];
+		buffer = ( T[] )new Object[bufSize];
 		this.capacity = bufSize;
 	}
 	
-	public void push(String element) {
+	@SuppressWarnings("unchecked")
+	public void push(T element) {
 		if(capacity <= top+1) { //stack full
-			String[] newBuffer = new String[capacity + 1];
+			T[] newBuffer = ( T[] )new Object[capacity + 1];
 			System.arraycopy(buffer, 0, newBuffer, 0, capacity);
 			newBuffer[capacity++] = element;
 			buffer = newBuffer;
@@ -27,10 +31,10 @@ public class MyStack {
 		top++;
 	}
 	
-	public String pop() throws MyStackException{
+	public T pop() throws MyStackException{
 		if(top < 0)
 			throw new MyStackException();
-		String returnObj = buffer[top];
+		T returnObj = buffer[top];
 		buffer[top--] = null;
 		return returnObj;
 	}
